@@ -9,6 +9,7 @@
     <nav>
       <ul>
         <li><a href="/train">Trains</a></li>
+        <li><a href="/ligne">Lignes</a></li>
       </ul>
     </nav>
 
