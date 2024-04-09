@@ -79,6 +79,11 @@ public class StartServer {
                 return "";
             });
 
+         // page listant les trains
+         get("/ligne", (req, res) -> {
+            return LigneGUI.list(LigneDAO.getInstance().getAll());
+        });
+
         // gestion des exceptions InvalidInputException
         // Cette exception est levée quand un paramètre d'une requête est invalide
         exception(InvalidInputException.class, (exception, req, res) -> {

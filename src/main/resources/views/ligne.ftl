@@ -12,7 +12,7 @@
            <td>${ligne.getNo()}</td>
            <td>${ligne.getNom()}</td>
            <td>
-             <form action="/ligne/supprimer?no=${train.getNo()?c}" method="POST">
+             <form action="/ligne/supprimer?no=${ligne.getNo()?c}" method="POST">
                <input type="submit" value="supprimer"/>
              </form>
            </td>
