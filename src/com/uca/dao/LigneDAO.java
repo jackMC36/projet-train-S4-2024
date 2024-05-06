@@ -4,8 +4,6 @@ import com.uca.InvalidInputException;
 
 import com.uca.entity.Ligne;
 
-import src.com.uca.entity.Ligne;
-
 import java.sql.*;
 import java.util.*;
 
@@ -31,7 +29,7 @@ public class LigneDAO extends AbstractDAO<Ligne> {
     // implémentation de la méthode abstraite héritée
     // elle transforme un tuple du ResultSet en un objet Ligne
     public Ligne getFromResultSet(ResultSet rs) throws SQLException {
-        return new Ligne(rs.getInt("noLigne"), rs.getString("no"));
+        return new Ligne(rs.getInt("noLigne"), rs.getString("type"));
     }
 
     // insère un nouveau Ligne
@@ -39,8 +37,8 @@ public class LigneDAO extends AbstractDAO<Ligne> {
         Connection connection = ConnectionPool.getConnection();
         try {
 
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Ligne(noLigne, No) VALUES (?, ?);");
-            preparedStatement.setInt(1, Ligne.getNo());
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Ligne(NoLigne, Nom) VALUES (?, ?);");
+            preparedStatement.setInt(1, Ligne.getNoLigne());
             preparedStatement.setString(2, Ligne.getNom());
             preparedStatement.executeUpdate();
 
@@ -54,7 +52,7 @@ public class LigneDAO extends AbstractDAO<Ligne> {
 
             // dans le cas où c'est une erreur due à une violation de la clé primaire
             if (sqlState.equalsIgnoreCase("23505")) {
-                String message = String.format("le Ligne de numéro %s existe déjà", Ligne.getNo());
+                String message = String.format("le Ligne de numéro %s existe déjà", Ligne.getNoLigne());
                 throw new InvalidInputException(message);
             }
 

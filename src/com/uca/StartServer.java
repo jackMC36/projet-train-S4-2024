@@ -12,6 +12,19 @@ import com.google.gson.Gson;
 
 import static spark.Spark.*;
 import spark.*;
+import com.uca.dao.ConnectionPool;
+import com.uca.dao.TrainDAO;
+import com.uca.entity.Train;
+import com.uca.gui.TrainGUI;
+import com.uca.InvalidInputException;
+import com.uca.dao.DBInitializer;
+import com.uca.dao.LigneDAO;
+import com.uca.entity.Ligne;
+import com.uca.dao.DepartDAO;
+import com.uca.entity.Depart;
+import com.uca.gui.ArretGUI;
+import com.uca.gui.LigneGUI;
+import com.uca.gui.DepartGUI;
 
 public class StartServer {
 
@@ -44,6 +57,23 @@ public class StartServer {
         get("/train", (req, res) -> {
                 return TrainGUI.list(TrainDAO.getInstance().getAll());
             });
+        
+        get("/arret", (req, res) -> {
+            return ArretGUI.list(ArretDAO.getInstance().getAll());
+            });
+        
+        
+        get("ligne", (req, res) -> {
+            return LigneGUI.list(LigneDAO.getInstance().getAll());
+            });
+        
+        get("depart", (req, res) -> {
+            return DepartGUI.list(DepartDAO.getInstance().getAll());
+            });
+
+
+
+        
 
         // requête pour l'ajout d'un nouveau train
         post("/train", (req, res) -> {
@@ -51,7 +81,7 @@ public class StartServer {
                 String type = "";
 
                 try {
-                    no = new Integer(req.queryParams("no"));
+                    no = Integer.valueOf(req.queryParams("no"));
                     type = req.queryParams("type");
                 } catch (Exception e) {
                     // en cas d'erreur de lecture des paramètre de la requête HTTP,
@@ -79,11 +109,6 @@ public class StartServer {
                 return "";
             });
 
-         // page listant les trains
-         get("/ligne", (req, res) -> {
-            return LigneGUI.list(LigneDAO.getInstance().getAll());
-        });
-
         // gestion des exceptions InvalidInputException
         // Cette exception est levée quand un paramètre d'une requête est invalide
         exception(InvalidInputException.class, (exception, req, res) -> {
@@ -95,5 +120,6 @@ public class StartServer {
                 // avec le message stocké dans l'exception
                 res.body("Invalid input: " + exception.getMessage());
             });
+        }
     }
-}
+

@@ -19,6 +19,7 @@ public class TrainDAO extends AbstractDAO<Train> {
     
     protected TrainDAO() {
         super("TRAIN");
+        
     }
 
     // accès à l'instance de la classe

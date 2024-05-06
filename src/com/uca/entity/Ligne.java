@@ -1,20 +1,38 @@
-package src.com.uca.entity;
+package com.uca.entity;
 
 public class Ligne {
-    private int no;
-    private String nom;
 
-    public Ligne(int no, String nom) {
-        this.no = no;
-        this.nom = nom;
+    private int NoLigne;
+    private String Nom;
+
+    public Ligne(int NoLigne, String Nom) {
+        this.NoLigne = NoLigne;
+        this.Nom = Nom;
     }
 
-    public int getNo() {
-        return this.no;
+    public int getNoLigne() {
+        return this.NoLigne;
     }
 
     public String getNom() {
-        return this.nom;
+        return this.Nom;
     }
+
+    public void setNoLigne(int NoLigne) {
+        this.NoLigne = NoLigne;
+    }
+
+    public void setNom(String Nom) {
+        this.Nom = Nom;
+    }
+
+    @Override
+    public String toString() {
+        return "Ligne{" + "NoLigne=" + NoLigne + ", NomLigne=" + Nom + '}';
+    }
+    
 }
+
+
+
 
