@@ -25,11 +25,6 @@ public class Ligne {
     public void setNom(String Nom) {
         this.Nom = Nom;
     }
-
-    @Override
-    public String toString() {
-        return "Ligne{" + "NoLigne=" + NoLigne + ", NomLigne=" + Nom + '}';
-    }
     
 }
 

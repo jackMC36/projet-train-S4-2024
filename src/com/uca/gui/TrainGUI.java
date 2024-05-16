@@ -29,4 +29,11 @@ public class TrainGUI {
         return AbstractGUI.callTemplate("train-add.ftl", input);
     }
 
+    public static String delete() throws IOException, TemplateException {
+        Map<String, Object> input = new HashMap<>();
+        input.put("title", "Supprimer un train");
+
+        return AbstractGUI.callTemplate("train-delete.ftl", input);
+    }
+
 }

@@ -9,10 +9,10 @@
       </tr>
        <#list trains as train>
          <tr>
-           <td>${train.getType()}</td>
-           <td>${train.getNo()}</td>
+           <td>${train.getNom()}</td>
+           <td>${train.getNoLigne()}</td>
            <td>
-             <form action="/train/supprimer?no=${train.getNo()?c}" method="POST">
+             <form action="/ligne/supprimer?no=${train.getNo()?c}" method="POST">
                <input type="submit" value="supprimer"/>
              </form>
            </td>

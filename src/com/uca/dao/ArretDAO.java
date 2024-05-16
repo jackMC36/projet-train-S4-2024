@@ -67,14 +67,15 @@ public class ArretDAO extends AbstractDAO<Arret> {
         ConnectionPool.releaseConnection(connection);
     }
 
-    public static void delete(int no, String ville, int rang) throws SQLException {
+    public static void delete(int noLigne, String Ville, int Rang, int Chrono) throws SQLException {
         Connection connection = ConnectionPool.getConnection();
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Arret WHERE NoLigne =? AND Ville =? AND Rang =?;");
-            preparedStatement.setInt(1, no);
-            preparedStatement.setString(2, ville);
-            preparedStatement.setInt(3, rang);
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Arret WHERE NoLigne =? AND Ville =? AND Rang =? AND Chrono =?;");
+            preparedStatement.setInt(1, noLigne);
+            preparedStatement.setString(2, Ville);
+            preparedStatement.setInt(3, Rang);
+            preparedStatement.setInt(4, Chrono);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

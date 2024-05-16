@@ -2,20 +2,20 @@ package com.uca.entity;
 
 public class Arret {
 
-    private int NoLigne;
+    private int noLigne;
     private int rang;
-    private String Ville;
-    private int Chrono;
+    private String ville;
+    private int chrono;
 
-    public Arret(int NoLigne, int rang, String Ville, int Chrono) {
-        this.NoLigne = NoLigne;
+    public Arret(int noLigne, int rang, String ville, int chrono) {
+        this.noLigne = noLigne;
         this.rang = rang;
-        this.Ville = Ville;
-        this.Chrono = Chrono;
+        this.ville = ville;
+        this.chrono = chrono;
     }
 
     public int getNoLigne() {
-        return this.NoLigne;
+        return this.noLigne;
     }
 
     public int getRang() {
@@ -23,34 +23,27 @@ public class Arret {
     }
 
     public String getVille() {
-        return this.Ville;
+        return this.ville;
     }
 
     public int getChrono() {
-        return this.Chrono;
+        return this.chrono;
     }
 
-    public void setNoLigne(int NoLigne) {
-        this.NoLigne = NoLigne;
+    public void setNoLigne(int noLigne) {
+        this.noLigne = noLigne;
     }
 
     public void setRang(int rang) {
         this.rang = rang;
     }
 
-    public void setVille(String Ville) {
-        this.Ville = Ville;
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 
-    public void setChrono(int Chrono) {
-        this.Chrono = Chrono;
+    public void setChrono(int chrono) {
+        this.chrono = chrono;
     }
-
-    @Override
-    public String toString() {
-        return "Arret{" + "NoLigne=" + NoLigne + ", rang=" + rang + ", Ville=" + Ville + ", Chrono=" + Chrono + '}';
-    }
-
-
     
 }

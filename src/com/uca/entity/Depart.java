@@ -2,43 +2,38 @@ package com.uca.entity;
 
 public class Depart {
 
-    private int NoLigne;
-    private String Heure;
-    private int NoTrain;
+    private int noLigne;
+    private String heure;
+    private int noTrain;
 
-    public Depart(int NoLigne, String Heure, int NoTrain) {
-        this.NoLigne = NoLigne;
-        this.Heure = Heure;
-        this.NoTrain = NoTrain;
+    public Depart(int noLigne, String Heure, int noTrain) {
+        this.noLigne = noLigne;
+        this.heure = Heure;
+        this.noTrain = noTrain;
     }
 
     public int getNoLigne() {
-        return this.NoLigne;
+        return this.noLigne;
     }
 
     public String getHeure() {
-        return this.Heure;
+        return this.heure;
     }
 
     public int getNoTrain() {
-        return this.NoTrain;
+        return this.noTrain;
     }
 
-    public void setNoLigne(int NoLigne) {
-        this.NoLigne = NoLigne;
+    public void setNoLigne(int noLigne) {
+        this.noLigne = noLigne;
     }
 
-    public void setHeure(String Heure) {
-        this.Heure = Heure;
+    public void setHeure(String heure) {
+        this.heure = heure;
     }
 
-    public void setNoTrain(int NoTrain) {
-        this.NoTrain = NoTrain;
-    }
-
-    @Override
-    public String toString() {
-        return "Depart{" + "NoLigne=" + NoLigne + ", Heure=" + Heure + ", NoTrain=" + NoTrain + '}';
+    public void setNoTrain(int noTrain) {
+        this.noTrain = noTrain;
     }
     
 }

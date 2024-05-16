@@ -9,6 +9,9 @@
     <nav>
       <ul>
         <li><a href="/train">Trains</a></li>
+        <li><a href="/arret">Arret</a></li>
+        <li><a href="/depart">Depart</a></li>
+        <li><a href="/ligne">Ligne</a></li>
       </ul>
     </nav>
 

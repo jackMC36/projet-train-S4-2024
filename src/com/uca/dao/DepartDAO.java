@@ -66,12 +66,14 @@ public class DepartDAO extends AbstractDAO<Depart> {
         ConnectionPool.releaseConnection(connection);
     }
 
-    public static void delete(int NoLigne, String Heure, int NoTrain) throws SQLException {
+    public static void delete(int noLigne, String Heure, int NoTrain) throws SQLException {
         Connection connection = ConnectionPool.getConnection();
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Depart WHERE NoLigne =? AND Heure =? AND NoTrain =?;");
-            preparedStatement.setInt(1, no);
+            preparedStatement.setInt(1, noLigne);
+            preparedStatement.setString(2, Heure);
+            preparedStatement.setInt(3, NoTrain);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

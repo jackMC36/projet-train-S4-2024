@@ -4,7 +4,7 @@
     <form action="/train" method="POST">
       <p>
         <label for="no">Numéro de train</label>
-        <input type="number" name="no" id="no" />
+        <input type="number" name="noTrain" id="noTrain" />
       </p>
       <p>
         <label for="type">Type</label>
