@@ -7,14 +7,15 @@
         <th>Numéro</th>
         <th></th>
       </tr>
-       <#list trains as train>
+       <#list departs as depart>
          <tr>
-           <td>${train.getType()}</td>
-           <td>${train.getNo()}</td>
+           <td>${depart.getNoLigne()}</td>
+           <td>${depart.getHeure()}</td>
+           <td>${depart.getNoTrain()}</td>
            <td>
-             <form action="/train/supprimer?no=${train.getNo()?c}" method="POST">
-               <input type="submit" value="supprimer"/>
-             </form>
+            <form action="/depart/supprimer?noLigne=${depart.getNoLigne()?c}&noTrain=${depart.getNoTrain()?c}&heure=${depart.getHeure()?url}" method="POST">
+              <input type="submit" value="supprimer"/>
+            </form>
            </td>
          </tr>
        </#list>

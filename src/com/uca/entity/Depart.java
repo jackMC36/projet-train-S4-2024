@@ -6,9 +6,9 @@ public class Depart {
     private String heure;
     private int noTrain;
 
-    public Depart(int noLigne, String Heure, int noTrain) {
+    public Depart(int noLigne, String heure, int noTrain) {
         this.noLigne = noLigne;
-        this.heure = Heure;
+        this.heure = heure;
         this.noTrain = noTrain;
     }
 

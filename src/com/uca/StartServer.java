@@ -160,22 +160,22 @@ public class StartServer {
             String nom = "";
 
             try {
-                NoLigne = Integer.valueOf(req.queryParams("NoLigne"));
-                Nom = req.queryParams("Nom");
+                noLigne = Integer.valueOf(req.queryParams("NoLigne"));
+                nom = req.queryParams("Nom");
             } catch (Exception e) {
                 // en cas d'erreur de lecture des paramètre de la requête HTTP,
                 // on retourne une erreur HTTP 400 
                 halt(400, "un paramètre est manquant ou n'est pas au bon format");
             }
 
-            LigneDAO.getInstance().add(new Ligne(NoLigne, Nom));
+            LigneDAO.getInstance().add(new Ligne(noLigne, nom));
             return LigneGUI.list(LigneDAO.getInstance().getAll());
         });
 
         // requête pour la suppression d'une ligne
         post("ligne/supprimer", (req, res) -> {
-            int NoLigne = Integer.parseInt(req.queryParams("NoLigne"));
-            LigneDAO.delete(NoLigne);
+            int noLigne = Integer.parseInt(req.queryParams("NoLigne"));
+            LigneDAO.delete(noLigne);
             // une fois la ligne supprimée,
             // on redirige le client sur la page listant les lignes avec une redirection temporaire
             res.redirect("/ligne");
@@ -194,35 +194,30 @@ public class StartServer {
 
         // requête pour l'ajout d'un nouveau depart
         post("depart", (req, res) -> {
-            Integer NoLigne = 0;
-            Integer NoTrain = 0;
-            String DateDepart = "";
-            String HeureDepart = "";
-            Integer NoArret = 0;
+            Integer noLigne = 0;
+            Integer noTrain = 0;
+            String heure = "";
 
             try {
-                NoLigne = Integer.valueOf(req.queryParams("NoLigne"));
-                NoTrain = Integer.valueOf(req.queryParams("NoTrain"));
-                DateDepart = req.queryParams("DateDepart");
-                HeureDepart = req.queryParams("HeureDepart");
-                NoArret = Integer.valueOf(req.queryParams("NoArret"));
+                noLigne = Integer.valueOf(req.queryParams("NoLigne"));
+                noTrain = Integer.valueOf(req.queryParams("NoTrain"));
+                heure = req.queryParams("Heure");
             } catch (Exception e) {
                 // en cas d'erreur de lecture des paramètre de la requête HTTP,
                 // on retourne une erreur HTTP 400 
                 halt(400, "un paramètre est manquant ou n'est pas au bon format");
             }
 
-            DepartDAO.getInstance().add(new Depart(NoLigne, NoTrain, DateDepart, HeureDepart, NoArret));
-
+            DepartDAO.getInstance().add(new Depart(noLigne, heure, noTrain));
             return DepartGUI.list(DepartDAO.getInstance().getAll());
         });
         
         // requête pour la suppression d'un depart
         post("depart/supprimer", (req, res) -> {
-            int NoLigne = Integer.parseInt(req.queryParams("noLigne"));
-            int NoTrain = Integer.parseInt(req.queryParams("noTrain"));
-            String Heure = req.queryParams("heure");
-            DepartDAO.delete(NoLigne, NoTrain, Heure);
+            int noLigne = Integer.parseInt(req.queryParams("NoLigne"));
+            int noTrain = Integer.parseInt(req.queryParams("NoTrain"));
+            String heure = req.queryParams("Heure");
+            DepartDAO.delete(noLigne, heure, noTrain);
             // une fois le depart supprimé,
             // on redirige le client sur la page listant les departs avec une redirection temporaire
             res.redirect("/depart");

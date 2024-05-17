@@ -3,24 +3,22 @@
   <@u.page>
     <table>
       <tr>
-        <th>Type</th>
-        <th>Numéro</th>
-        <th></th>
+        <th>Numéro de Ligne</th>
+        <th>Rang</th>
+        <th>Ville</th>
+        <th>Chrono</th>
       </tr>
-       <#list trains as train>
+       <#list arrets as arret>
          <tr>
-           <td>${train.getType()}</td>
-           <td>${train.getNo()}</td>
-           <td>
-             <form action="/train/supprimer?no=${train.getNo()?c}" method="POST">
-               <input type="submit" value="supprimer"/>
-             </form>
-           </td>
+           <td>${arret.getNoLigne()}</td>
+           <td>${arret.getRang()}</td>
+           <td>${arret.getVille()}</td>
+           <td>${arret.getChrono()}</td>
          </tr>
        </#list>
     </table>
 
     <p>
-        <a href="/train/ajout">Ajouter</a>
+        <a href="/arret/ajout">Ajouter</a>
     </p>    
   </@u.page>

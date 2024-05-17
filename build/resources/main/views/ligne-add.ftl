@@ -1,10 +1,10 @@
 <#import "utils.ftl" as u>
 
   <@u.page>
-    <form action="/train" method="POST">
+    <form action="/ligne" method="POST">
       <p>
-        <label for="no">Numéro de train</label>
-        <input type="number" name="noTrain" id="noTrain" />
+        <label for="no">Numéro de arret</label>
+        <input type="number" name="no" id="no" />
       </p>
       <p>
         <label for="type">Type</label>

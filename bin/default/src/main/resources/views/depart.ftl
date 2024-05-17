@@ -13,9 +13,9 @@
            <td>${depart.getHeure()}</td>
            <td>${depart.getNoTrain()}</td>
            <td>
-             <form action="/depart/supprimer?no=${train.getNoLigne()?c}" method="POST">
-               <input type="submit" value="supprimer"/>
-             </form>
+            <form action="/depart/supprimer?noLigne=${depart.getNoLigne()?c}&noTrain=${depart.getNoTrain()?c}&heure=${depart.getHeure()?url}" method="POST">
+              <input type="submit" value="supprimer"/>
+            </form>
            </td>
          </tr>
        </#list>

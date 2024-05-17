@@ -10,7 +10,7 @@
        <#list trains as train>
          <tr>
            <td>${train.getType()}</td>
-           <td>${train.getNo()}</td>
+           <td>${train.getNoTrain()}</td>
            <td>
              <form action="/train/supprimer?no=${train.getNo()?c}" method="POST">
                <input type="submit" value="supprimer"/>

@@ -29,7 +29,7 @@ public class DepartDAO extends AbstractDAO<Depart> {
     // implémentation de la méthode abstraite héritée
     // elle transforme un tuple du ResultSet en un objet Depart
     public Depart getFromResultSet(ResultSet rs) throws SQLException {
-        return new Depart(rs.getInt("noDepart"), rs.getString("type"));
+        return new Depart(rs.getInt("NoLigne"), rs.getString("Heure"), rs.getInt("NoTrain"));
     }
 
     // insère un nouveau Depart
@@ -37,10 +37,10 @@ public class DepartDAO extends AbstractDAO<Depart> {
         Connection connection = ConnectionPool.getConnection();
         try {
 
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Depart(NoTrain, Heure, NoLigne) VALUES (?, ?);");
-            preparedStatement.setInt(1, Depart.getNoDepart());
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Depart(NoLigne, Heure, NoTrain) VALUES (?, ?, ?);");
+            preparedStatement.setInt(1, Depart.getNoLigne());
             preparedStatement.setString(2, Depart.getHeure());
-            preparedStatement.setInt(3, Depart.getNoLigne());
+            preparedStatement.setInt(3, Depart.getNoTrain());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

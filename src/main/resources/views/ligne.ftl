@@ -7,12 +7,12 @@
         <th>Numéro</th>
         <th></th>
       </tr>
-       <#list trains as train>
+       <#list lignes as ligne>
          <tr>
-           <td>${train.getNom()}</td>
-           <td>${train.getNoLigne()}</td>
+           <td>${ligne.getNoLigne()}</td>
+           <td>${ligne.getNom()}</td>
            <td>
-             <form action="/ligne/supprimer?no=${train.getNo()?c}" method="POST">
+             <form action="/ligne/supprimer?no=${ligne.getNoLigne()?c}" method="POST">
                <input type="submit" value="supprimer"/>
              </form>
            </td>
@@ -21,6 +21,6 @@
     </table>
 
     <p>
-        <a href="/train/ajout">Ajouter</a>
+        <a href="/ligne/ajout">Ajouter</a>
     </p>    
   </@u.page>
