@@ -23,8 +23,8 @@ public class DBInitializer {
                 }
 
             if (!tableExists(connection, "ARRET")) {
-                    statement = connection.prepareStatement("CREATE TABLE ARRET (NoLigne integer, Rang integer, Ville text, Chrono integer, primary key(NoLigne, Rang)), FOREIGN KEY(NoLigne) REFERENCES LIGNE(NoLigne);");
-                    statement.executeUpdate();
+                statement = connection.prepareStatement("CREATE TABLE ARRET (NoLigne integer, Rang integer, Ville text, Chrono integer, primary key(NoLigne, Rang), FOREIGN KEY(NoLigne) REFERENCES LIGNE(NoLigne));");
+                statement.executeUpdate();
                 }
 
             if (!tableExists(connection, "DEPART")) {
