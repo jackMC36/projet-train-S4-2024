@@ -39,7 +39,7 @@ public class TrainDAO extends AbstractDAO<Train> {
         try {
 
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO train(notrain, type) VALUES (?, ?);");
-            preparedStatement.setInt(1, train.getNo());
+            preparedStatement.setInt(1, train.getNoTrain());
             preparedStatement.setString(2, train.getType());
             preparedStatement.executeUpdate();
 
@@ -53,7 +53,7 @@ public class TrainDAO extends AbstractDAO<Train> {
 
             // dans le cas où c'est une erreur due à une violation de la clé primaire
             if (sqlState.equalsIgnoreCase("23505")) {
-                String message = String.format("le train de numéro %s existe déjà", train.getNo());
+                String message = String.format("le train de numéro %s existe déjà", train.getNoTrain());
                 throw new InvalidInputException(message);
             }
 

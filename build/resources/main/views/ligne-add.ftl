@@ -7,8 +7,8 @@
         <input type="number" name="no" id="no" />
       </p>
       <p>
-        <label for="type">Type</label>
-        <input type="text" name="type" id="type" />
+        <label for="type">Nom:</label>
+        <input type="text" name="nom" id="nom" />
       </p>
       <p>
         <input type="submit" value="Ajouter"/>

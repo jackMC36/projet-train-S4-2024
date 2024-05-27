@@ -71,7 +71,7 @@ public class StartServer {
                 String type = "";
 
                 try {
-                    no = Integer.valueOf(req.queryParams("no"));
+                    no = Integer.valueOf(req.queryParams("noTrain"));
                     type = req.queryParams("type");
                 } catch (Exception e) {
                     // en cas d'erreur de lecture des paramètre de la requête HTTP,
@@ -86,7 +86,7 @@ public class StartServer {
 
         // requête pour la suppression d'un train 
         post("/train/supprimer", (req, res) -> {
-                int no = Integer.parseInt(req.queryParams("no"));
+                int no = Integer.parseInt(req.queryParams("noTrain"));
                 TrainDAO.delete(no);
                 // une fois le train supprimé,
                 // on redirige le client sur la page listant les trains avec une redirection temporaire
@@ -161,7 +161,7 @@ public class StartServer {
 
             try {
                 noLigne = Integer.valueOf(req.queryParams("NoLigne"));
-                nom = req.queryParams("Nom");
+                nom = req.queryParams("nom");
             } catch (Exception e) {
                 // en cas d'erreur de lecture des paramètre de la requête HTTP,
                 // on retourne une erreur HTTP 400 

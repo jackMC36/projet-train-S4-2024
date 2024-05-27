@@ -10,7 +10,7 @@ public class Train {
         this.type = type;
     }
 
-    public int getNo() {
+    public int getNoTrain() {
         return this.noTrain;
     }
 

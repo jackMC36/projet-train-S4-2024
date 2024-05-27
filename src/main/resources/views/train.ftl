@@ -12,7 +12,7 @@
            <td>${train.getType()}</td>
            <td>${train.getNoTrain()}</td>
            <td>
-             <form action="/train/supprimer?no=${train.getNo()?c}" method="POST">
+             <form action="/train/supprimer?no=${train.getNoTrain()?c}" method="POST">
                <input type="submit" value="supprimer"/>
              </form>
            </td>
