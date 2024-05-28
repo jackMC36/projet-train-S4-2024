@@ -7,6 +7,8 @@ import com.uca.entity.Train;
 import java.sql.*;
 import java.util.*;
 
+import org.h2.command.Prepared;
+
 /**
  * Classe permet de modifier les trains stockés dans la table train
  * Elle est un singleton, c'est à dire une classe qui n'a qu'une seule instance
@@ -70,9 +72,12 @@ public class TrainDAO extends AbstractDAO<Train> {
         Connection connection = ConnectionPool.getConnection();
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM train WHERE notrain =?;");
-            preparedStatement.setInt(1, no);
-            preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement1 = connection.prepareStatement("DELETE FROM depart WHERE notrain =?;");
+            PreparedStatement preparedStatement2 = connection.prepareStatement("DELETE FROM train WHERE notrain =?;");
+            preparedStatement1.setInt(1, no);
+            preparedStatement1.executeUpdate();
+            preparedStatement2.setInt(1, no);
+            preparedStatement2.executeUpdate();
 
         } catch (SQLException e) {
             // dès qu'une exception SQL est levée, il faut annuler la transaction

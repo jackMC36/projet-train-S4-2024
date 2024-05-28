@@ -3,9 +3,9 @@
   <@u.page>
     <table>
       <tr>
-        <th>NoLigne</th>
+        <th>Numéro de Ligne</th>
         <th>Heure</th>
-        <th>NoTrain</th>
+        <th>Numéro de Train</th>
       </tr>
        <#list departs as depart>
          <tr>

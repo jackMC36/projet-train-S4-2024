@@ -67,6 +67,27 @@ public class ArretDAO extends AbstractDAO<Arret> {
         ConnectionPool.releaseConnection(connection);
     }
 
+    public List<Arret> getArrets(int NoLigne) throws SQLException {
+        Connection connection = ConnectionPool.getConnection();
+        List<Arret> arrets = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Arret WHERE NoLigne = ?;");
+            preparedStatement.setInt(1, NoLigne);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                arrets.add(getFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            // dès qu'une exception SQL est levée, il faut annuler la transaction
+            connection.rollback();
+            // on propage l'exception
+            throw e;
+        }
+        connection.commit();
+        ConnectionPool.releaseConnection(connection);
+        return arrets;
+    }
+
     public static void delete(int noLigne, String Ville, int Rang, int Chrono) throws SQLException {
         Connection connection = ConnectionPool.getConnection();
 

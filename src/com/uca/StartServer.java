@@ -145,6 +145,25 @@ public class StartServer {
             return "";
         });
 
+        get("arret/:NoLigne", (req, res) -> {
+            String noLigneParam = req.params(":NoLigne");
+            String[] parts = noLigneParam.split("=");
+            if (parts.length != 2) {
+                halt(400, "Invalid NoLigne parameter");
+                return "";
+            }
+        
+            int NoLigne;
+            try {
+                NoLigne = Integer.parseInt(parts[1]);
+            } catch (NumberFormatException e) {
+                halt(400, "NoLigne must be a number");
+                return "";
+            }
+        
+            return ArretGUI.list(ArretDAO.getInstance().getArrets(NoLigne));
+        });
+
 
         
         // page listant les lignes
@@ -230,6 +249,8 @@ public class StartServer {
             res.redirect("/depart");
             return "";
         });
+
+
 
 
 
