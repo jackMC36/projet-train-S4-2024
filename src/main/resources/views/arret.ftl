@@ -14,6 +14,10 @@
            <td>${arret.getRang()}</td>
            <td>${arret.getVille()}</td>
            <td>${arret.getChrono()}</td>
+           <td>
+            <form action="/arret/supprimer?NoLigne=${arret.getNoLigne()?c}&Rang=${arret.getRang()?c}&Ville=${arret.getVille()}&Chrono=${arret.getChrono()?url}" method="POST">
+                <input type="submit" value="supprimer"/>
+          </td>
          </tr>
        </#list>
     </table>

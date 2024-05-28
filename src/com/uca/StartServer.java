@@ -124,13 +124,23 @@ public class StartServer {
         });
 
         post("arret/supprimer", (req, res) -> {
-            int NoLigne = Integer.parseInt(req.queryParams("NoLigne"));
-            int Rang = Integer.parseInt(req.queryParams("Rang"));
-            int Chrono = Integer.parseInt(req.queryParams("Chrono"));
-            String Ville = req.queryParams("Ville");
+            String noLigneParam = req.queryParams("NoLigne");
+            String rangParam = req.queryParams("Rang");
+            String chronoParam = req.queryParams("Chrono");
+            String villeParam = req.queryParams("Ville");
+        
+            if (noLigneParam == null || rangParam == null || chronoParam == null || villeParam == null) {
+                halt(400, "Erreur dans les paramètres de la requête HTTP");
+                return "";
+            }
+        
+            int NoLigne = Integer.parseInt(noLigneParam);
+            int Rang = Integer.parseInt(rangParam);
+            int Chrono = Integer.parseInt(chronoParam);
+            String Ville = villeParam;
+        
             ArretDAO.delete(NoLigne, Ville, Rang, Chrono);
-            // une fois l'arret supprimé,
-            // on redirige le client sur la page listant les arrets avec une redirection temporaire
+        
             res.redirect("/arret");
             return "";
         });
@@ -191,21 +201,21 @@ public class StartServer {
 
         // requête pour l'ajout d'un nouveau depart
         post("depart", (req, res) -> {
-            Integer noLigne = 0;
-            Integer noTrain = 0;
-            String heure = "";
+            Integer NoLigne = 0;
+            Integer NoTrain = 0;
+            String Heure = "";
 
             try {
-                noLigne = Integer.valueOf(req.queryParams("NoLigne"));
-                noTrain = Integer.valueOf(req.queryParams("NoTrain"));
-                heure = req.queryParams("Heure");
+                NoLigne = Integer.valueOf(req.queryParams("NoLigne"));
+                NoTrain = Integer.valueOf(req.queryParams("NoTrain"));
+                Heure = req.queryParams("Heure");
             } catch (Exception e) {
                 // en cas d'erreur de lecture des paramètre de la requête HTTP,
                 // on retourne une erreur HTTP 400 
                 halt(400, "un paramètre est manquant ou n'est pas au bon format");
             }
 
-            DepartDAO.getInstance().add(new Depart(noLigne, heure, noTrain));
+            DepartDAO.getInstance().add(new Depart(NoLigne, Heure, NoTrain));
             return DepartGUI.list(DepartDAO.getInstance().getAll());
         });
         

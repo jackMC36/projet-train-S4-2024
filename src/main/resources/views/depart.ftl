@@ -3,9 +3,9 @@
   <@u.page>
     <table>
       <tr>
-        <th>Type</th>
-        <th>Numéro</th>
-        <th></th>
+        <th>NoLigne</th>
+        <th>Heure</th>
+        <th>NoTrain</th>
       </tr>
        <#list departs as depart>
          <tr>
@@ -13,7 +13,7 @@
            <td>${depart.getHeure()}</td>
            <td>${depart.getNoTrain()}</td>
            <td>
-            <form action="/depart/supprimer?noLigne=${depart.getNoLigne()?c}&noTrain=${depart.getNoTrain()?c}&heure=${depart.getHeure()?url}" method="POST">
+            <form action="/depart/supprimer?NoLigne=${depart.getNoLigne()?c}&NoTrain=${depart.getNoTrain()?c}&Heure=${depart.getHeure()?url}" method="POST">
               <input type="submit" value="supprimer"/>
             </form>
            </td>
@@ -22,6 +22,6 @@
     </table>
 
     <p>
-        <a href="/train/ajout">Ajouter</a>
+        <a href="/depart/ajout">Ajouter</a>
     </p>    
   </@u.page>

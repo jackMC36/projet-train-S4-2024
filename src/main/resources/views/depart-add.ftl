@@ -4,11 +4,15 @@
     <form action="/depart" method="POST">
       <p>
         <label for="no">Numéro de Ligne</label>
-        <input type="number" name="no" id="noLigne" />
+        <input type="number" name="NoLigne" id="NoLigne" />
+      </p>
+      <p>
+        <label for="type">Numéro de Train</label>
+        <input type="text" name="NoTrain" id="NoTrain" />
       </p>
       <p>
         <label for="type">Heure de départ</label>
-        <input type="text" name="heure" id="heure" />
+        <input type="text" name="Heure" id="Heure" />
       </p>
       <p>
         <input type="submit" value="Ajouter"/>
