@@ -29,7 +29,7 @@ public class LigneDAO extends AbstractDAO<Ligne> {
     // implémentation de la méthode abstraite héritée
     // elle transforme un tuple du ResultSet en un objet Ligne
     public Ligne getFromResultSet(ResultSet rs) throws SQLException {
-        return new Ligne(rs.getInt("noLigne"), rs.getString("type"));
+        return new Ligne(rs.getInt("NoLigne"), rs.getString("Nom"));
     }
 
     // insère un nouveau Ligne
@@ -69,9 +69,13 @@ public class LigneDAO extends AbstractDAO<Ligne> {
         Connection connection = ConnectionPool.getConnection();
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Ligne WHERE noLigne =?;");
-            preparedStatement.setInt(1, no);
-            preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement1 = connection.prepareStatement("DELETE FROM Arret WHERE NoLigne =?;");
+            PreparedStatement preparedStatement2 = connection.prepareStatement("DELETE FROM Ligne WHERE NoLigne =?;");
+            preparedStatement1.setInt(1, no);
+            preparedStatement1.executeUpdate();
+            preparedStatement2.setInt(1, no);
+            preparedStatement2.executeUpdate();
+            
 
         } catch (SQLException e) {
             // dès qu'une exception SQL est levée, il faut annuler la transaction

@@ -37,7 +37,7 @@ public class ArretDAO extends AbstractDAO<Arret> {
         Connection connection = ConnectionPool.getConnection();
         try {
 
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Arret(NoLigne, Rang, Ville, Chrono) VALUES (?, ?, ?, ?)0;");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Arret(NoLigne, Rang, Ville, Chrono) VALUES (?, ?, ?, ?);");
             preparedStatement.setInt(1, Arret.getNoLigne());
             preparedStatement.setInt(2, Arret.getRang());
             preparedStatement.setString(3, Arret.getVille());

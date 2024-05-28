@@ -12,19 +12,8 @@ import com.google.gson.Gson;
 
 import static spark.Spark.*;
 import spark.*;
-import com.uca.dao.ConnectionPool;
-import com.uca.dao.TrainDAO;
-import com.uca.entity.Train;
-import com.uca.gui.TrainGUI;
+
 import com.uca.InvalidInputException;
-import com.uca.dao.DBInitializer;
-import com.uca.dao.LigneDAO;
-import com.uca.entity.Ligne;
-import com.uca.dao.DepartDAO;
-import com.uca.entity.Depart;
-import com.uca.gui.ArretGUI;
-import com.uca.gui.LigneGUI;
-import com.uca.gui.DepartGUI;
 
 public class StartServer {
 
@@ -71,8 +60,8 @@ public class StartServer {
                 String type = "";
 
                 try {
-                    no = Integer.valueOf(req.queryParams("noTrain"));
-                    type = req.queryParams("type");
+                    no = Integer.valueOf(req.queryParams("NoTrain"));
+                    type = req.queryParams("Type");
                 } catch (Exception e) {
                     // en cas d'erreur de lecture des paramètre de la requête HTTP,
                     // on retourne une erreur HTTP 400 
@@ -86,12 +75,16 @@ public class StartServer {
 
         // requête pour la suppression d'un train 
         post("/train/supprimer", (req, res) -> {
-                int no = Integer.parseInt(req.queryParams("noTrain"));
-                TrainDAO.delete(no);
-                // une fois le train supprimé,
-                // on redirige le client sur la page listant les trains avec une redirection temporaire
-                res.redirect("/train");
-                return "";
+            String paramStr = req.queryParams("NoTrain");
+            if (paramStr == null || paramStr.isEmpty()) {
+                halt(400, "NoTrain parameter is missing"); 
+            }
+            int NoTrain = Integer.parseInt(paramStr);
+            TrainDAO.delete(NoTrain);
+            // une fois le train supprimé,
+            // on redirige le client sur la page listant les trains avec une redirection temporaire
+            res.redirect("/train");
+            return "";
             });
 
             
@@ -109,33 +102,33 @@ public class StartServer {
 
         // requête pour l'ajout d'un nouvel arret
         post("arret", (req, res) -> {
-            Integer noLigne = 0;
-            Integer rang = 0;
-            String ville = "";
-            Integer chrono = 0;
+            Integer NoLigne = 0;
+            Integer Rang = 0;
+            String Ville = "";
+            Integer Chrono = 0;
 
             try {
-                noLigne = Integer.valueOf(req.queryParams("NoLigne"));
-                rang = Integer.valueOf(req.queryParams("rang"));
-                ville = req.queryParams("Ville");
-                chrono = Integer.valueOf(req.queryParams("Chrono"));
+                NoLigne = Integer.valueOf(req.queryParams("NoLigne"));
+                Rang = Integer.valueOf(req.queryParams("Rang"));
+                Ville = req.queryParams("Ville");
+                Chrono = Integer.valueOf(req.queryParams("Chrono"));
             } catch (Exception e) {
                 // en cas d'erreur de lecture des paramètre de la requête HTTP,
                 // on retourne une erreur HTTP 400 
-                halt(400, "un paramètre est manquant ou n'est pas au bon format");
+                halt(400, "un paramètre est manquant ou n'est pas au bon format (la ligne doit être creer avant)");
             }
 
-            ArretDAO.getInstance().add(new Arret(noLigne, rang, ville, chrono));
+            ArretDAO.getInstance().add(new Arret(NoLigne, Rang, Ville, Chrono));
 
             return ArretGUI.list(ArretDAO.getInstance().getAll());
         });
 
         post("arret/supprimer", (req, res) -> {
-            int noLigne = Integer.parseInt(req.queryParams("noLigne"));
-            int rang = Integer.parseInt(req.queryParams("rang"));
-            int chrono = Integer.parseInt(req.queryParams("chrono"));
-            String ville = req.queryParams("ville");
-            ArretDAO.delete(noLigne, ville, rang, chrono);
+            int NoLigne = Integer.parseInt(req.queryParams("NoLigne"));
+            int Rang = Integer.parseInt(req.queryParams("Rang"));
+            int Chrono = Integer.parseInt(req.queryParams("Chrono"));
+            String Ville = req.queryParams("Ville");
+            ArretDAO.delete(NoLigne, Ville, Rang, Chrono);
             // une fois l'arret supprimé,
             // on redirige le client sur la page listant les arrets avec une redirection temporaire
             res.redirect("/arret");
@@ -161,7 +154,7 @@ public class StartServer {
 
             try {
                 noLigne = Integer.valueOf(req.queryParams("NoLigne"));
-                nom = req.queryParams("nom");
+                nom = req.queryParams("Nom");
             } catch (Exception e) {
                 // en cas d'erreur de lecture des paramètre de la requête HTTP,
                 // on retourne une erreur HTTP 400 
@@ -174,8 +167,12 @@ public class StartServer {
 
         // requête pour la suppression d'une ligne
         post("ligne/supprimer", (req, res) -> {
-            int noLigne = Integer.parseInt(req.queryParams("NoLigne"));
-            LigneDAO.delete(noLigne);
+            String noLigneStr = req.queryParams("NoLigne");
+            if (noLigneStr == null || noLigneStr.isEmpty()) {
+                halt(400, "NoLigne parameter is missing");
+            }
+            int NoLigne = Integer.parseInt(noLigneStr);
+            LigneDAO.delete(NoLigne);
             // une fois la ligne supprimée,
             // on redirige le client sur la page listant les lignes avec une redirection temporaire
             res.redirect("/ligne");

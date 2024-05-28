@@ -3,12 +3,12 @@
   <@u.page>
     <form action="/ligne" method="POST">
       <p>
-        <label for="no">Numéro de arret</label>
-        <input type="number" name="no" id="no" />
+        <label for="no">Numéro de Ligne</label>
+        <input type="number" name="NoLigne" id="NoLigne" />
       </p>
       <p>
         <label for="type">Nom:</label>
-        <input type="text" name="nom" id="nom" />
+        <input type="text" name="Nom" id="Nom" />
       </p>
       <p>
         <input type="submit" value="Ajouter"/>

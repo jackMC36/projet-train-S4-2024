@@ -33,7 +33,7 @@ public class TrainGUI {
         Map<String, Object> input = new HashMap<>();
         input.put("title", "Supprimer un train");
 
-        return AbstractGUI.callTemplate("train-delete.ftl", input);
+        return AbstractGUI.callTemplate("train.ftl", input);
     }
 
 }
