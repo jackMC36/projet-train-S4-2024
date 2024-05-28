@@ -90,7 +90,7 @@ public class ArretDAO extends AbstractDAO<Arret> {
 
     public static void delete(int noLigne, String Ville, int Rang, int Chrono) throws SQLException {
         Connection connection = ConnectionPool.getConnection();
-
+    
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Arret WHERE NoLigne =? AND Ville =? AND Rang =? AND Chrono =?;");
             preparedStatement.setInt(1, noLigne);
@@ -98,14 +98,73 @@ public class ArretDAO extends AbstractDAO<Arret> {
             preparedStatement.setInt(3, Rang);
             preparedStatement.setInt(4, Chrono);
             preparedStatement.executeUpdate();
-
+    
+            // Decrement the rang of all arrets with a rang greater than the deleted arret
+            preparedStatement = connection.prepareStatement("UPDATE Arret SET Rang = Rang - 1 WHERE NoLigne =? AND Rang > ?");
+            preparedStatement.setInt(1, noLigne);
+            preparedStatement.setInt(2, Rang);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            // dès qu'une exception SQL est levée, il faut annuler la transaction
             connection.rollback();
-            // on propage l'exception
             throw e;
         }
-        
+        connection.commit();
+        ConnectionPool.releaseConnection(connection);
+    }
+    
+    
+    public static void insert(Arret arret) throws SQLException {
+        Connection connection = ConnectionPool.getConnection();
+    
+        try {
+            // Check if the difference between the chrono of the new arret and the previous arret is at least 15 minutes
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT Chrono FROM Arret WHERE NoLigne =? AND Rang =?");
+            preparedStatement.setInt(1, arret.getNoLigne());
+            preparedStatement.setInt(2, arret.getRang() - 1);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next() && arret.getChrono() - resultSet.getInt("Chrono") < 15) {
+                throw new SQLException("The difference between the chrono of consecutive arrets must be at least 15 minutes");
+            }
+    
+            // Insert the new arret
+            preparedStatement = connection.prepareStatement("INSERT INTO Arret (NoLigne, Ville, Rang, Chrono) VALUES (?, ?, ?, ?);");
+            preparedStatement.setInt(1, arret.getNoLigne());
+            preparedStatement.setString(2, arret.getVille());
+            preparedStatement.setInt(3, arret.getRang());
+            preparedStatement.setInt(4, arret.getChrono());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        }
+        connection.commit();
+        ConnectionPool.releaseConnection(connection);
+    }
+    
+    public static void update(Arret arret) throws SQLException {
+        Connection connection = ConnectionPool.getConnection();
+    
+        try {
+            
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT Chrono FROM Arret WHERE NoLigne =? AND Rang =?");
+            preparedStatement.setInt(1, arret.getNoLigne());
+            preparedStatement.setInt(2, arret.getRang() - 1);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next() && arret.getChrono() - resultSet.getInt("Chrono") < 15) {
+                throw new SQLException("The difference between the chrono of consecutive arrets must be at least 15 minutes");
+            }
+    
+           
+            preparedStatement = connection.prepareStatement("UPDATE Arret SET Ville =?, Rang =?, Chrono =? WHERE NoLigne =?");
+            preparedStatement.setString(1, arret.getVille());
+            preparedStatement.setInt(2, arret.getRang());
+            preparedStatement.setInt(3, arret.getChrono());
+            preparedStatement.setInt(4, arret.getNoLigne());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        }
         connection.commit();
         ConnectionPool.releaseConnection(connection);
     }

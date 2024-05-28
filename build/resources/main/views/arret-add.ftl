@@ -15,7 +15,7 @@
         <input type="text" name="Ville" id="Ville" />
       </p>
       <p>
-        <label for="Chrono">Chrono</label>
+        <label for="Chrono">Chrono (minutes)</label>
         <input type="text" name="Chrono" id="Chrono" />
       </p>
       <p>
